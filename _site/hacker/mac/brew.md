@@ -1,3 +1,8 @@
+# 安装
+```shell
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+```
+
 # 查看源
 查看核心仓库源
 ```shell
