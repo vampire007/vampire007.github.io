@@ -154,6 +154,10 @@ venv.bak/
 # mkdocs documentation
 /site
 
+# Jekyll
+/_site/
+.jekyll-cache/
+
 # mypy
 .mypy_cache/
 .dmypy.json
