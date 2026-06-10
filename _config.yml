@@ -28,9 +28,22 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  vampire
 
 # Build settings
-theme: minima
+theme: jekyll-theme-chirpy
 plugins:
   - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-archives
+  - jekyll-include-cache
+
+# Chirpy-specific settings
+collections:
+  tabs:
+    output: true
+    sort_by: order
+  docs:
+    output: true
+    permalink: /docs/:path/
 
 # Exclude from processing.
 # The following items will not be processed, by default.

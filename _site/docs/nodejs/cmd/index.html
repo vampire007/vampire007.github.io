@@ -1,0 +1,162 @@
+<p>以下是 Node.js 开发中常用的命令分类整理，涵盖包管理、脚本执行、模块管理、调试及环境配置等方面：</p>
+
+<hr />
+
+<h3 id="一包管理npmyarnpnpm">一、包管理（npm/yarn/pnpm）</h3>
+<ol>
+  <li><strong>初始化项目</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init          <span class="c"># 交互式生成 package.json</span>
+npm init <span class="nt">-y</span>       <span class="c"># 使用默认配置快速生成</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>安装依赖</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> &lt;pkg&gt;         <span class="c"># 安装包（默认 --save）</span>
+npm <span class="nb">install</span> &lt;pkg&gt;@&lt;ver&gt;   <span class="c"># 安装指定版本（如 npm install express@4.18）</span>
+npm <span class="nb">install</span> <span class="nt">-D</span> &lt;pkg&gt;      <span class="c"># 安装开发依赖（--save-dev）</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> &lt;pkg&gt;      <span class="c"># 全局安装</span>
+npm <span class="nb">install</span>               <span class="c"># 安装所有 package.json 中的依赖</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>卸载依赖</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm uninstall &lt;pkg&gt;       <span class="c"># 卸载并从 package.json 移除</span>
+npm uninstall <span class="nt">-g</span> &lt;pkg&gt;    <span class="c"># 卸载全局包</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>更新依赖</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm update                <span class="c"># 更新所有依赖到最新兼容版本</span>
+npm outdated              <span class="c"># 查看过期的依赖</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>其他包管理命令</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm list                  <span class="c"># 查看已安装的依赖树</span>
+npm list <span class="nt">-g</span> <span class="nt">--depth</span><span class="o">=</span>0     <span class="c"># 查看全局安装的顶层包</span>
+npm cache clean <span class="nt">--force</span>   <span class="c"># 清理缓存</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="二执行脚本">二、执行脚本</h3>
+<ol>
+  <li><strong>运行 package.json 中的脚本</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run &lt;script&gt;          <span class="c"># 如 npm run dev/start/build</span>
+npm start                 <span class="c"># 快捷运行 start 脚本</span>
+npm <span class="nb">test</span>                  <span class="c"># 快捷运行 test 脚本</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>直接执行 Node.js 文件</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node app.js               <span class="c"># 运行 JavaScript 文件</span>
+node <span class="nt">-e</span> <span class="s2">"console.log('Hello')"</span>  <span class="c"># 执行内联代码</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>使用 npx 执行包命令</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app my-app  <span class="c"># 临时安装并执行包命令（无需全局安装）</span>
+npx http-server              <span class="c"># 启动临时 HTTP 服务器</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="三模块与版本管理">三、模块与版本管理</h3>
+<ol>
+  <li><strong>nvm（Node Version Manager）</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install</span> &lt;version&gt;    <span class="c"># 安装指定 Node.js 版本</span>
+nvm use &lt;version&gt;        <span class="c"># 切换版本</span>
+nvm <span class="nb">ls</span>                   <span class="c"># 查看已安装版本</span>
+nvm <span class="nb">alias </span>default &lt;ver&gt;  <span class="c"># 设置默认版本</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>npm 版本管理</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm version &lt;ver&gt;        <span class="c"># 更新包版本（如 npm version 1.2.3）</span>
+npm version major        <span class="c"># 递增主版本号（1.x.x → 2.0.0）</span>
+npm publish              <span class="c"># 发布包到 npm 仓库</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="四调试与监控">四、调试与监控</h3>
+<ol>
+  <li><strong>调试模式</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node inspect app.js      <span class="c"># 启动调试器（Chrome DevTools 协议）</span>
+node <span class="nt">--inspect</span> app.js    <span class="c"># 启用远程调试（默认端口 9229）</span>
+node <span class="nt">--inspect-brk</span> app.js <span class="c"># 在首行暂停等待调试器连接</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>性能监控</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node <span class="nt">--prof</span> app.js       <span class="c"># 生成 V8 性能日志</span>
+node <span class="nt">--prof-process</span> isolate-<span class="k">*</span>.log  <span class="c"># 分析性能日志</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>进程管理</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pm2 start app.js         <span class="c"># 使用 PM2 启动守护进程</span>
+pm2 list                 <span class="c"># 查看运行中的进程</span>
+pm2 logs                 <span class="c"># 查看日志</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="五环境与配置">五、环境与配置</h3>
+<ol>
+  <li><strong>环境变量</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">NODE_ENV</span><span class="o">=</span>production node app.js  <span class="c"># 设置环境变量</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Node.js 选项</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node <span class="nt">--max-old-space-size</span><span class="o">=</span>4096 app.js  <span class="c"># 增加内存限制</span>
+node <span class="nt">--experimental-modules</span> app.mjs    <span class="c"># 启用实验性 ESM 支持</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="六其他实用命令">六、其他实用命令</h3>
+<ol>
+  <li><strong>查看信息</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node <span class="nt">-v</span>                  <span class="c"># 查看 Node.js 版本</span>
+npm <span class="nt">-v</span>                   <span class="c"># 查看 npm 版本</span>
+node <span class="nt">-e</span> <span class="s2">"console.log(process.versions)"</span>  <span class="c"># 查看详细版本信息</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>包文档</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm docs &lt;pkg&gt;           <span class="c"># 打开包的文档网站</span>
+npm repo &lt;pkg&gt;           <span class="c"># 打开包的 GitHub 仓库</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<h3 id="替代包管理器yarnpnpm">替代包管理器（Yarn/pnpm）</h3>
+<ul>
+  <li><strong>Yarn</strong>:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add &lt;pkg&gt;           <span class="c"># 安装依赖</span>
+yarn remove &lt;pkg&gt;        <span class="c"># 卸载依赖</span>
+yarn upgrade             <span class="c"># 更新依赖</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>pnpm</strong>:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pnpm add &lt;pkg&gt;           <span class="c"># 安装依赖</span>
+pnpm <span class="nb">install</span>             <span class="c"># 安装所有依赖</span>
+pnpm store prune         <span class="c"># 清理未引用的存储</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="总结">总结</h3>
+<ul>
+  <li><strong>开发核心</strong>：<code class="language-plaintext highlighter-rouge">npm install/run/init</code>、<code class="language-plaintext highlighter-rouge">node app.js</code></li>
+  <li><strong>版本控制</strong>：<code class="language-plaintext highlighter-rouge">nvm install/use</code></li>
+  <li><strong>调试优化</strong>：<code class="language-plaintext highlighter-rouge">--inspect</code>、<code class="language-plaintext highlighter-rouge">--prof</code></li>
+  <li><strong>进程管理</strong>：<code class="language-plaintext highlighter-rouge">pm2</code> 系列命令</li>
+</ul>
+
+<p>根据需求选择工具，如追求速度可用 <code class="language-plaintext highlighter-rouge">pnpm</code>，稳定项目可用 <code class="language-plaintext highlighter-rouge">npm</code>，复杂进程用 <code class="language-plaintext highlighter-rouge">pm2</code>。</p>
