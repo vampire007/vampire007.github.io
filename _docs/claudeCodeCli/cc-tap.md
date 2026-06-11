@@ -1,5 +1,6 @@
 ---
 title: cc-tap 安装
+layout: page
 ---
 
 # install

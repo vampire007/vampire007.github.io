@@ -1,5 +1,6 @@
 ---
 title: Git SSH 配置
+layout: page
 ---
 
 # 当前仓库使用指定的公钥

@@ -1,5 +1,6 @@
 ---
 title: Homebrew 安装与配置
+layout: page
 ---
 
 # 安装

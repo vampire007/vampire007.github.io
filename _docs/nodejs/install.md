@@ -1,5 +1,6 @@
 ---
 title: Node.js 安装
+layout: page
 ---
 
 # 安装地址
