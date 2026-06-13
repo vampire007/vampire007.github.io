@@ -1,0 +1,30 @@
+---
+layout: compress
+swcache: true
+---
+
+[
+{% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "categories": {{ post.categories | join: ', ' | jsonify }},
+    "tags": {{ post.tags | join: ', ' | jsonify }},
+    "date": {{ post.date | jsonify }},
+    {% capture content -%}{% include post-summary.html full_text=true %}{%- endcapture -%}
+    "content": {{ content | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+{% if site.docs.size > 0 %},{% endif %}
+{% for doc in site.docs %}
+  {
+    "title": {{ doc.title | default: doc.name | jsonify }},
+    "url": {{ doc.url | relative_url | jsonify }},
+    "categories": {{ doc.categories | default: "docs" | join: ', ' | jsonify }},
+    "tags": {{ doc.tags | join: ', ' | jsonify }},
+    "date": {{ doc.date | default: site.time | jsonify }},
+    {% capture content -%}{{ doc.content | strip_html | strip_newlines }}{%- endcapture -%}
+    "content": {{ content | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

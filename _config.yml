@@ -27,6 +27,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: vampire
 github_username:  vampire
 
+# Language setting
+lang: zh-CN
+
 # Avatar (头像照片)
 avatar: /assets/img/avatar.jpg
 
@@ -47,6 +50,10 @@ collections:
   docs:
     output: true
     permalink: /docs/:path/
+
+# Search configuration
+search:
+  enabled: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
