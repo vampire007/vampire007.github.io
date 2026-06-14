@@ -1,6 +1,7 @@
 ---
 title: Homebrew 安装与配置
 layout: page
+date: 2026-03-10 10:00:00 +0800
 ---
 
 # 安装

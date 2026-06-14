@@ -1,6 +1,7 @@
 ---
 title: Node.js 安装
 layout: page
+date: 2026-02-20 10:00:00 +0800
 ---
 
 # 安装地址
