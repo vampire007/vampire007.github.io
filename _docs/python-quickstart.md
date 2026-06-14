@@ -68,3 +68,8 @@ pip3 install package_name
 # 查看已安装的包
 pip3 list
 ```
+
+
+## 新增章节
+
+这是测试批量处理的内容更新。
