@@ -1,5 +1,5 @@
 ---
-title: python quickstart
+title: Python 快速入门
 layout: page
 date: 2026-06-14 20:22:31 +0800
 categories: [编程, Python]
