@@ -1,5 +1,5 @@
 ---
-title: 跳过登录
+title: tips
 layout: page
 date: 2026-05-25 10:00:00 +0800
 ---
