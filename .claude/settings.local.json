@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allowedBashCommands": [
+      "bundle exec jekyll build",
+      "bundle exec jekyll serve",
+      "git add",
+      "git commit",
+      "git push",
+      "git diff",
+      "git status",
+      "git log",
+      "head -",
+      "grep -",
+      "cat",
+      "ls -la",
+      "which -a ruby",
+      "ruby --version",
+      "gem install bundler",
+      "gem list bundler",
+      "bundle --version",
+      "sed",
+      "awk",
+      "find",
+      "date",
+      "mktemp",
+      "mv"
+    ],
+    "deniedMCPTools": []
+  }
+}
