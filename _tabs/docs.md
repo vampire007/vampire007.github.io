@@ -14,6 +14,7 @@ order: 2
 
 ### Mac
 - [Homebrew 安装与配置](/docs/mac/brew/)
+- [GitHub 加速](/docs/mac/github加速/)
 
 ### Node.js
 - [Node.js 常用命令](/docs/nodejs/cmd/)
