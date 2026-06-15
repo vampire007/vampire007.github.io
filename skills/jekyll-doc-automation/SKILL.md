@@ -19,8 +19,9 @@ Use this skill when:
 
 1. **Extract metadata** from the Markdown file or ask user for details
 2. **Add front matter** with required fields (title, layout, date, categories, tags)
-3. **Build the site** to verify everything works
-4. **Commit and push** changes to Git repository
+3. **Process images** - detect and fix image paths to use assets directory
+4. **Build the site** to verify everything works
+5. **Commit and push** changes to Git repository
 
 ## Step-by-Step Process
 
@@ -62,7 +63,101 @@ Please provide:
 
 If user doesn't specify categories, default to `["docs"]`.
 
-### Step 3: Add Front Matter
+### Step 3: Process Images (Critical)
+
+Jekyll Chirpy theme requires images to be in the `assets/` directory for proper rendering. This step automatically handles all image references.
+
+#### Image Path Problem
+When Markdown uses relative image paths like:
+```markdown
+![description](img.png)
+![description](./image.jpg)
+```
+
+Jekyll may not resolve these correctly, causing broken images on the rendered page.
+
+#### Solution: Move Images to Assets Directory
+
+**Step 3.1: Detect all image references in the document**
+
+Search for image patterns in the Markdown file:
+```bash
+# Find all image references
+grep -oE '!\[.*?\]\(([^)]+\.png|[^)]+\.jpg|[^)]+\.jpeg|[^)]+\.gif|[^)]+\.webp)\)' <filepath>
+```
+
+**Step 3.2: Extract image filenames**
+
+For each image reference, extract the filename (e.g., `img.png`, `screenshot.jpg`).
+
+**Step 3.3: Determine source and destination paths**
+
+- Source: Check if image exists in the same directory as the Markdown file
+- Destination: `assets/img/docs/<subdirectory>/` where `<subdirectory>` matches the doc's location
+
+Example mapping:
+- `_docs/mac/github加速.md` → images go to `assets/img/docs/mac/`
+- `_docs/nodejs/install.md` → images go to `assets/img/docs/nodejs/`
+- `_docs/git.md` → images go to `assets/img/docs/`
+
+**Step 3.4: Create destination directory and copy images**
+
+```bash
+# Create directory structure
+mkdir -p assets/img/docs/<subdirectory>
+
+# Copy all images
+cp _docs/<subdirectory>/*.png assets/img/docs/<subdirectory>/
+cp _docs/<subdirectory>/*.jpg assets/img/docs/<subdirectory>/
+# ... repeat for other image formats
+```
+
+**Step 3.5: Update image paths in Markdown**
+
+Replace all relative image paths with absolute paths to assets directory:
+
+Before:
+```markdown
+![img.png](img.png)
+![screenshot](./screenshot.jpg)
+```
+
+After:
+```markdown
+![img.png](/assets/img/docs/mac/img.png)
+![screenshot](/assets/img/docs/mac/screenshot.jpg)
+```
+
+Use search and replace to update all image references:
+```python
+# Pseudo-code for updating image paths
+import re
+
+# Pattern to match markdown images
+image_pattern = r'!\[(.*?)\]\(([^)]+\.(?:png|jpg|jpeg|gif|webp))\)'
+
+def update_image_path(match):
+    alt_text = match.group(1)
+    original_path = match.group(2)
+    filename = os.path.basename(original_path)
+    
+    # Determine subdirectory based on doc location
+    # e.g., _docs/mac/file.md -> mac
+    subdirectory = get_doc_subdirectory(filepath)
+    
+    new_path = f'/assets/img/docs/{subdirectory}/{filename}'
+    return f'![{alt_text}]({new_path})'
+
+updated_content = re.sub(image_pattern, update_image_path, content)
+```
+
+**Important notes:**
+- Always use absolute paths starting with `/` for assets
+- Preserve the original alt text
+- Handle both relative paths (`img.png`) and current directory paths (`./img.png`)
+- Support common image formats: png, jpg, jpeg, gif, webp
+
+### Step 4: Add Front Matter
 
 Create the front matter block with these required fields:
 
@@ -102,7 +197,7 @@ new_content = front_matter + original_content.lstrip()
 write_file(filepath, new_content)
 ```
 
-### Step 4: Build and Verify
+### Step 5: Build and Verify
 
 Run Jekyll build to ensure the document is properly processed:
 
@@ -121,16 +216,17 @@ Optional: Check search index to confirm document is searchable:
 cat _site/assets/js/data/search.json | python3 -m json.tool | grep "<title>"
 ```
 
-### Step 5: Git Commit and Push
+### Step 6: Git Commit and Push
 
 If user agreed to auto-commit:
 
 ```bash
-# Stage the document
+# Stage the document AND images
 git add <filepath>
+git add assets/img/docs/<subdirectory>/*
 
 # Create descriptive commit message
-git commit -m "docs: add <document title>"
+git commit -m "docs: add <document title> with images"
 
 # Push to remote repository
 git push origin main
@@ -145,12 +241,29 @@ File: <filepath>
 Title: <title>
 Categories: [<categories>]
 Tags: [<tags>]
+Images: <count> images moved to assets/
 Commit: <commit hash>
 
 Your document will be live on GitHub Pages in a few minutes.
 ```
 
-## Edge Cases and Handling
+### Edge Cases and Handling
+
+#### No Images Found
+If the document has no images:
+- Skip image processing step
+- Show message: "ℹ️ No images detected in this document"
+
+#### Images Already in Assets
+If images are already referenced with `/assets/` path:
+- Skip those images
+- Only process images with relative paths
+
+#### Missing Image Files
+If an image is referenced but file doesn't exist:
+- Warn user: "⚠️ Image file not found: <path>"
+- Continue processing other images
+- Don't fail the entire workflow
 
 ### Missing Information
 
@@ -177,7 +290,7 @@ If user wants to process multiple files:
 
 ## Examples
 
-### Example 1: Single Document Processing
+### Example 1: Single Document with Images
 
 **User input:**
 ```
@@ -188,11 +301,31 @@ If user wants to process multiple files:
 1. Read `_docs/docker.md`
 2. Extract title from first H1 or filename
 3. Ask for categories and tags
+4. **Detect images in document**
+5. **Copy images to `assets/img/docs/`**
+6. **Update image paths to absolute paths**
+7. Add front matter
+8. Build site
+9. Commit document AND images
+10. Push to remote
+
+### Example 2: Document Without Images
+
+**User input:**
+```
+处理一下 _docs/git.md 这个文档
+```
+
+**Skill actions:**
+1. Read `_docs/git.md`
+2. Detect no images present
+3. Skip image processing
 4. Add front matter
 5. Build site
-6. Commit and push
+6. Commit only the document
+7. Push to remote
 
-### Example 2: Batch Processing
+### Example 3: Batch Processing
 
 **User input:**
 ```
@@ -202,11 +335,14 @@ If user wants to process multiple files:
 **Skill actions:**
 1. List all `.md` files in `_docs/`
 2. Identify which ones lack front matter
-3. Process each file (ask for metadata per file or use defaults)
+3. For each file:
+   - Process images (if any)
+   - Ask for metadata or use defaults
+   - Add front matter
 4. Build site once
-5. Commit all files together
+5. Commit all files and images together
 
-### Example 3: Quick Add with Defaults
+### Example 4: Quick Add with Defaults
 
 **User input:**
 ```
@@ -219,7 +355,8 @@ If user wants to process multiple files:
 3. Use default categories: `["docs"]`
 4. Use current date
 5. Add content from clipboard
-6. Build, commit, push
+6. **Process images if any**
+7. Build, commit, push
 
 ## Best Practices
 
@@ -242,6 +379,18 @@ Follow conventional commits pattern:
 - `docs: fix <title>` - Fixed errors in document
 
 ## Troubleshooting
+
+### Image Path Issues
+
+Symptoms:
+- Images show as broken icons
+- Console shows 404 errors for image files
+
+Solutions:
+- Ensure images are in `assets/img/docs/<subdirectory>/`
+- Verify paths start with `/` (absolute paths)
+- Check that images were copied during processing
+- Rebuild site after moving images
 
 ### Build Fails
 Common causes:
@@ -289,6 +438,34 @@ bundle exec jekyll build
 ### Commit Pattern
 ```bash
 git add _docs/<filename>.md
+git add assets/img/docs/<subdirectory>/*
 git commit -m "docs: <action> <title>"
 git push origin main
 ```
+
+### Image Processing Quick Reference
+
+**Image Directory Structure:**
+```
+assets/img/docs/
+├── mac/           # Images for _docs/mac/*.md
+├── nodejs/        # Images for _docs/nodejs/*.md
+├── claudeCodeCli/ # Images for _docs/claudeCodeCli/*.md
+└── ...            # Other subdirectories as needed
+```
+
+**Image Path Format:**
+```markdown
+# Correct (absolute path)
+![description](/assets/img/docs/mac/image.png)
+
+# Incorrect (relative path - will break)
+![description](image.png)
+![description](./image.png)
+```
+
+**Supported Image Formats:**
+- PNG (.png)
+- JPEG (.jpg, .jpeg)
+- GIF (.gif)
+- WebP (.webp)
