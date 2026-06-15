@@ -500,9 +500,9 @@ batch_process() {
     for file in "${files_to_process[@]}"; do
         echo "----------------------------------------"
         if process_document "$file" "yes"; then
-            ((success_count++))
+            success_count=$((success_count + 1))
         else
-            ((fail_count++))
+            fail_count=$((fail_count + 1))
             print_error "Failed to process: $file"
         fi
         echo ""
