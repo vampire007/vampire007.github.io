@@ -16,20 +16,20 @@ https://modelscope.cn/docs/model-service/API-Inference/intro
 ## cc-switch 配置
 1. 需要先开启 路由
 
-![img.png](img.png)
+![img.png](/assets/img/docs/claudeCodeCli/img.png)
 
 2. baseUrl
 https://api-inference.modelscope.cn/v1
 
-![img_1.png](img_1.png)
+![img_1.png](/assets/img/docs/claudeCodeCli/img_1.png)
 
 3. api格式 
 
-![img_3.png](img_3.png)
+![img_3.png](/assets/img/docs/claudeCodeCli/img_3.png)
 
 4. 认证字段
 
-![img_2.png](img_2.png)
+![img_2.png](/assets/img/docs/claudeCodeCli/img_2.png)
 
 ## 注意
 1. 秘钥是完整的字符串，带有 ms- 前缀
