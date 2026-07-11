@@ -125,6 +125,24 @@
     playAt(n);
   }
 
+  /* --- Try autoplay on page load --- */
+  function tryAutoplay(){
+    if(!tracks.length) return;
+    playAt(randomIndex());
+  }
+
+  /* If autoplay was blocked, start playing on first user interaction */
+  var firstInteraction = false;
+  function resumeOnInteraction(){
+    if(firstInteraction || !tracks.length) return;
+    firstInteraction = true;
+    document.removeEventListener('click', resumeOnInteraction);
+    document.removeEventListener('touchstart', resumeOnInteraction);
+    playAt(randomIndex());
+  }
+  document.addEventListener('click', resumeOnInteraction);
+  document.addEventListener('touchstart', resumeOnInteraction);
+
   /* --- Init UI --- */
   function init(){
     var toggle = document.getElementById('musicToggle');
@@ -136,6 +154,9 @@
     var progBar = document.getElementById('progressBar');
 
     if(!tracks.length){ renderList(); toggle.style.opacity='.4'; toggle.style.cursor='default'; return; }
+
+    /* Auto-play on load */
+    tryAutoplay();
 
     /* Toggle panel */
     toggle.onclick = function(e){
@@ -155,6 +176,7 @@
     /* Play/Pause */
     playBtn.onclick = function(e){
       e.stopPropagation();
+      if(!firstInteraction) { firstInteraction = true; document.removeEventListener('click', resumeOnInteraction); document.removeEventListener('touchstart', resumeOnInteraction); }
       if(currentIndex < 0){ playAt(randomIndex()); return; }
       if(isPlaying){ audio.pause(); isPlaying = false; playBtn.innerHTML = '▶️'; toggle.classList.remove('playing'); }
       else { audio.play(); isPlaying = true; playBtn.innerHTML = '⏸'; toggle.classList.add('playing'); }
