@@ -8,6 +8,7 @@ order: 2
 ## 文档目录
 
 ### Claude Code CLI
+- [安装指南](/docs/claudeCodeCli/install/)
 - [cc-tap 安装](/docs/claudeCodeCli/cc-tap/)
 - [魔搭社区模型使用](/docs/claudeCodeCli/modelScope/)
 - [跳过登录](/docs/claudeCodeCli/tips/)
