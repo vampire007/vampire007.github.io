@@ -60,6 +60,9 @@
   var panelOpen = false;
   var hasStarted = false;
 
+  /* Pick ONE random track up front; retry same track on autoplay block */
+  var pick = randomIndex();
+
   /* --- Random pick --- */
   function randomIndex(){
     if(tracks.length<=1) return 0;
@@ -128,7 +131,7 @@
   /* --- Try autoplay on page load --- */
   function tryAutoplay(){
     if(!tracks.length) return;
-    playAt(randomIndex());
+    playAt(pick);
   }
 
   /* If autoplay was blocked, start playing on first user interaction */
@@ -138,7 +141,7 @@
     firstInteraction = true;
     document.removeEventListener('click', resumeOnInteraction);
     document.removeEventListener('touchstart', resumeOnInteraction);
-    playAt(randomIndex());
+    playAt(pick);
   }
   document.addEventListener('click', resumeOnInteraction);
   document.addEventListener('touchstart', resumeOnInteraction);
@@ -161,7 +164,7 @@
     /* Toggle panel */
     toggle.onclick = function(e){
       e.stopPropagation();
-      if(!hasStarted && tracks.length){ playAt(randomIndex()); return; }
+      if(!hasStarted && tracks.length){ playAt(pick); return; }
       panelOpen = !panelOpen;
       panel.classList.toggle('show', panelOpen);
     };
@@ -177,7 +180,7 @@
     playBtn.onclick = function(e){
       e.stopPropagation();
       if(!firstInteraction) { firstInteraction = true; document.removeEventListener('click', resumeOnInteraction); document.removeEventListener('touchstart', resumeOnInteraction); }
-      if(currentIndex < 0){ playAt(randomIndex()); return; }
+      if(currentIndex < 0){ playAt(pick); return; }
       if(isPlaying){ audio.pause(); isPlaying = false; playBtn.innerHTML = '▶️'; toggle.classList.remove('playing'); }
       else { audio.play(); isPlaying = true; playBtn.innerHTML = '⏸'; toggle.classList.add('playing'); }
     };
