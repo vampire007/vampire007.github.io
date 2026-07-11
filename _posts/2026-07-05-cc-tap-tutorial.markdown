@@ -1,7 +1,8 @@
 ---
-title: cc-tap 安装
-layout: page
-date: 2026-05-01 10:00:00 +0800
+layout: post
+title: "Claude Code Lens (cc-tap) 教程：本地可视化监控你的 AI 编程会话"
+date: 2026-07-05 +0800
+categories: tool
 ---
 
 每次用 Claude Code 写代码时，你是否好奇它到底读了哪些文件、调用了什么工具、消耗了多少 token？`cc-tap`（原名 cc-lens）就是一个运行在本地的分析仪表盘，专门用来可视化 Claude Code 的本地数据。
