@@ -23,3 +23,6 @@ order: 2
 
 ### Git
 - [Git SSH 配置](/docs/git/)
+
+### Xcode
+- [Flutter iOS 真机调试指南](/docs/xcode/flutter-ios-real-device/)
