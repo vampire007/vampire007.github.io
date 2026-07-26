@@ -1,0 +1,24 @@
+<section id="access-lastmod">
+  <h2 class="panel-heading">{{ site.data.locales[lang].panel.lastmod | default: "最近更新" }}</h2>
+  <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+    {% assign all_updates = '' | split: '' %}
+    
+    {% for post in site.posts %}
+      {% assign update = post | merge: {type: 'post'} %}
+      {% assign all_updates = all_updates | push: update %}
+    {% endfor %}
+    
+    {% for doc in site.docs %}
+      {% assign update = doc | merge: {type: 'doc'} %}
+      {% assign all_updates = all_updates | push: update %}
+    {% endfor %}
+    
+    {% assign sorted_updates = all_updates | sort: 'date' | reverse %}
+    
+    {% for item in sorted_updates limit: 5 %}
+      <li class="text-truncate lh-lg">
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
