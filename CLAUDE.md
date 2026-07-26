@@ -20,12 +20,12 @@ bundle install                    # 安装/更新 Ruby 依赖
 
 - **Minima 主题**，无自定义 `_layouts/` 或 `_includes/` 覆盖——所有模板来自主题 gem。
 - **`_posts/`** — 博客文章，遵循 `YYYY-MM-DD-title.markdown` 命名规范，带 YAML front matter。`_posts/r.md` 是一篇独立的考试笔记（未遵循命名规范）。
-- **`hacker/`** — 技术指南，按主题组织为子目录中的 `.md` 文件（`hacker/git.md`、`hacker/nodejs/install.md`、`hacker/nodejs/cmd.md`、`hacker/mac/brew.md`）。使用 `layout: page`，是独立页面而非文章。
+- **`_docs/`** — 技术指南文档，按主题组织为子目录中的 `.md` 文件（`_docs/mac/brew.md`、`_docs/nodejs/install.md`、`_docs/nodejs/cmd.md`、`_docs/git.md`、`_docs/xcode/flutter-ios-real-device.md`、`_docs/xcode/xcodebuildmcp.md`）。使用 `layout: page`，通过 `_tabs/docs.md` 索引展示在 Docs 标签页。
 - **配置** — `_config.yml` 使用 kramdown + MathJax (`math_engine: mathjax`) 和 Rouge 语法高亮。未使用 `github-pages` gem，直接使用 Jekyll 4.4.1。
 - **部署** — 推送到 `main` 分支即触发 GitHub Pages 自动部署。
 
 ## 内容规范
 
 - 内容中英混杂，编辑时请匹配周围内容的语言风格。
-- `hacker/` 下的指南为实操配置笔记（镜像源、SSH 配置、nvm 安装等），保持简练、以命令为主。
+- **`_docs/`** 下的指南为实操配置笔记（镜像源、SSH 配置、nvm 安装等），保持简练、以命令为主。
 - 文章 front matter 必须包含：`layout`、`title`、`date`（带时区如 `+0800`）。

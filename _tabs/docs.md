@@ -26,3 +26,4 @@ order: 2
 
 ### Xcode
 - [Flutter iOS 真机调试指南](/docs/xcode/flutter-ios-real-device/)
+- [XcodeBuildMCP 配置指南](/docs/xcode/xcodebuildmcp/)

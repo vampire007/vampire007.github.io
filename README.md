@@ -1,9 +1,21 @@
-vampire's coding notes
+# vampire007.github.io
 
-# 本地启动呢调试
+Personal coding notes blog — a static site built with **Jekyll** + **Chirpy theme**, hosted on GitHub Pages.
+
+## Local Development
+
 ```shell
 bundle exec jekyll serve
 ```
 
-# theme
+Once the server is running, visit:
+
+```
+http://127.0.0.1:4000/
+```
+
+The page supports LiveReload — changes are reflected automatically.
+
+## Theme
+
 https://jekyllrb.com/docs/themes/
