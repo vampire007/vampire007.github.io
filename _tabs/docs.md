@@ -10,6 +10,7 @@ order: 2
 ### Claude Code CLI
 - [安装指南](/docs/claudeCodeCli/install/)
 - [cc-tap 安装](/docs/claudeCodeCli/cc-tap/)
+- [Agnes API 接入指南](/docs/claudeCodeCli/agnes-api-integration/)
 - [魔搭社区模型使用](/docs/claudeCodeCli/modelScope/)
 - [跳过登录](/docs/claudeCodeCli/tips/)
 
@@ -27,3 +28,6 @@ order: 2
 ### Xcode
 - [Flutter iOS 真机调试指南](/docs/xcode/flutter-ios-real-device/)
 - [XcodeBuildMCP 配置指南](/docs/xcode/xcodebuildmcp/)
+
+### Cloudflare
+- [DigitalPlat 免费域名接入 Cloudflare](/docs/cloudflare/digitalplat-integration/)
