@@ -1,0 +1,11 @@
+name = "jekyll-pv-do"
+main = "index.js"
+compatibility_date = "2025-04-05"
+
+[[durable_objects.bindings]]
+name = "PV_COUNTER"
+class_name = "PageViewCounter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["PageViewCounter"]

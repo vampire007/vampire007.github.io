@@ -1,0 +1,76 @@
+<div class="share-wrapper">
+  <span class="share-label">{{ site.data.locales[lang].share.title | default: '分享' }}</span>
+  <ul class="share-links d-flex gap-2 flex-wrap align-items-center">
+    <li>
+      <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url | url_encode }}&text={{ page.title | url_encode }}"
+         target="_blank" rel="noopener" title="Twitter" class="btn btn-outline-primary btn-sm share-btn">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}"
+         target="_blank" rel="noopener" title="Facebook" class="btn btn-outline-primary btn-sm share-btn">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a href="https://linkedin.com/shareArticle?url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}"
+         target="_blank" rel="noopener" title="LinkedIn" class="btn btn-outline-primary btn-sm share-btn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a href="http://service.weibo.com/share/share.php?title={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}"
+         target="_blank" rel="noopener" title="微博" class="btn btn-outline-primary btn-sm share-btn">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <button type="button" class="btn btn-outline-secondary btn-sm share-btn" onclick="copyLink()" title="复制链接" id="copy-btn">
+        <i class="fas fa-link"></i>
+      </button>
+    </li>
+  </ul>
+</div>
+
+<script>
+function copyLink() {
+  const url = '{{ page.url | absolute_url }}';
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i>';
+    setTimeout(() => { btn.innerHTML = original; }, 1500);
+  });
+}
+</script>
+
+<style>
+.share-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-color, #e9ecef);
+}
+.share-label {
+  font-size: 0.875rem;
+  color: var(--text-muted-color, #6c757d);
+  white-space: nowrap;
+}
+.share-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.share-btn {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+.share-btn:hover {
+  transform: translateY(-1px);
+}
+</style>

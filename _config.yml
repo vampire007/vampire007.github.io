@@ -23,12 +23,27 @@ email: zhaoxiong888@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Log some notes about coding.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://andyvictory.dpdns.org" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: vampire
 github_username:  vampire
 
 # Language setting
 lang: zh-CN
+
+# Comments
+comments:
+  provider: giscus
+  giscus:
+    repo: vampire/vampire007.github.io
+    repo_id: ''
+    category: Comments
+    category_id: ''
+    mapping: pathname
+    strict: 0
+    reactions_enabled: 1
+    emit_metadata: 0
+    input_position: bottom
+    lang: zh-CN
 
 # Avatar (头像照片)
 avatar: /assets/img/avatar.jpg

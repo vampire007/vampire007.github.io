@@ -1,0 +1,47 @@
+<div class="pv-counter" id="pv-counter">
+  <span class="pv-item">阅读 <span id="pv-count" class="pv-num">—</span></span>
+  <span class="pv-sep">·</span>
+  <span class="pv-item">全站 <span id="pv-total" class="pv-num">—</span></span>
+</div>
+
+<script>
+(function() {
+  var apiUrl = 'https://jekyll-pv-do.andyvictory.dpdns.org/track';
+  var page = window.location.pathname;
+
+  function render(count, total) {
+    document.getElementById('pv-count').textContent = count;
+    document.getElementById('pv-total').textContent = total;
+  }
+
+  fetch(apiUrl + '?page=' + encodeURIComponent(page), {
+    method: 'POST',
+    credentials: 'omit'
+  }).then(function(r) { return r.json(); })
+    .then(function(d) { render(d.count, d.total); })
+    .catch(function() {
+      fetch(apiUrl + '?page=' + encodeURIComponent(page) + '&dry=1')
+        .then(function(r) { return r.json(); })
+        .then(function(d) { render(d.count, d.total); })
+    });
+})();
+</script>
+
+<style>
+.pv-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-muted-color, #6c757d);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+}
+.pv-num {
+  font-weight: 600;
+  color: var(--text-color, #212529);
+}
+.pv-sep {
+  opacity: 0.5;
+}
+</style>
