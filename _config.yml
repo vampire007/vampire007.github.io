@@ -30,6 +30,14 @@ github_username:  vampire
 # Language setting
 lang: zh-CN
 
+# Defaults (全局默认配置)
+defaults:
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      comments: true
+
 # Comments
 comments:
   provider: giscus
