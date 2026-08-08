@@ -53,13 +53,28 @@ iOS 真机测试必须有签名证书，即使是个人免费账号也可以，�
    flutter devices
    ```
 
-   你应该能在列表中看到你的 iPhone 手机（前面带有一个苹果图标）。
+   你应该能在列表中看到你的 iPhone 手机（前面带有一个苹果图标）。返回结果类似如下：
+```text
+Found 3 connected devices:
+  chocoQuest (mobile) • 28868207-FD4C-4594-A75B-141D664B4572 • ios            • com.apple.CoreSimulator.SimRuntime.iOS-26-5 (simulator)
+  macOS (desktop)     • macos                                • darwin-arm64   • macOS 26.5 25F71 darwin-arm64
+  Chrome (web)        • chrome                               • web-javascript • Google Chrome 151.0.7922.76
+
+Found 1 wirelessly connected device:
+  Andy的iPhone (wireless) (mobile) • 00008101-000279D40E90001E • ios • iOS 26.5 2xxxx
+```
 
 3. 直接运行项目：
 
-   ```shell
-   flutter run
-   ```
+```shell
+flutter run
+
+# 指定设备进行运行
+flutter run -d 00008101-000279D40E90001E
+
+# 运行 Release 版本，否则无法在手机上直接启动，而需要依赖 ide 
+flutter run -d 00008101-000279D40E90001E --release
+```
 
    如果有多个设备同时连接，终端会提示你选择设备，输入手机对应的数字回车即可。
 
