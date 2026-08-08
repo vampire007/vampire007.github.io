@@ -32,3 +32,9 @@ order: 2
 ### Cloudflare
 - [DigitalPlat 免费域名接入 Cloudflare](/docs/cloudflare/digitalplat-integration/)
 - [Workers 自定义域名配置](/docs/cloudflare/worker-custom-domain/)
+
+### Jekyll
+- [PV 统计与评论区配置](/docs/jekyll/pv-counter-and-comments/)
+
+### Jekyll
+- [PV 统计与评论区配置](/docs/jekyll/pv-counter-and-comments/)
