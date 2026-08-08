@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: AndyVictory's homepage
-email: zhaoxiong888@example.com
+email: example@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Log some notes about coding.
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -34,10 +34,10 @@ lang: zh-CN
 comments:
   provider: giscus
   giscus:
-    repo: vampire/vampire007.github.io
-    repo_id: ''
-    category: Comments
-    category_id: ''
+    repo: vampire007/vampire007.github.io
+    repo_id: 'R_kgDOReCzMQ'
+    category: Q&A
+    category_id: 'DIC_kwDOReCzMc4DC6Np'
     mapping: pathname
     strict: 0
     reactions_enabled: 1
